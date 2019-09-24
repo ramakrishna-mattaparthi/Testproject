@@ -1,0 +1,35 @@
+pipeline {
+
+	agent any
+	
+	stages {
+	
+		stage ('Compile Stage) {
+			
+				step{
+					withMaven(maven: 'LOCALMAVEN'){
+			
+						sh 'mvn clean compile'
+						}	
+					}		
+			}
+			stage('Testing stage') {
+			
+				step{
+				withMaven(maven: 'LOCALMAVEN'){
+			
+						sh 'mvn test'
+						}	
+					}
+				}
+			stage('Deployment stage') {
+			
+				step{
+				withMaven(maven: 'LOCALMAVEN'){
+			
+						sh 'mvn deploy'
+						}	
+					}
+				}
+			}
+		}
